@@ -1,5 +1,5 @@
-import { User } from "../types";
-import { signUpUserDal } from "./usersDal";
+import { UserInterface } from "../types";
+import { signUpUserDal } from "./usersDal"
 
-export const signUpUserService = async (user: User) =>
+export const signUpUserService = async (user: UserInterface) =>
   await signUpUserDal(user);

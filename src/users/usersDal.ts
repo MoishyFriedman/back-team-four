@@ -1,3 +1,7 @@
-import { User } from "../types"
+import { UserInterface } from "../types";
+import { User } from "./userModel";
 
-export const signUpUserDal = async (user: User) => {}
+export const signUpUserDal = async (user: UserInterface) => {
+ const newUser = new User(user)
+ await newUser.save();
+};
