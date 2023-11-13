@@ -1,3 +1,3 @@
-import { User } from "../types"
+import { UserInterface } from "../types"
 
-export const signUpUserDal = async (user: User) => {}
+export const signUpUserDal = async (user: UserInterface) => {}
