@@ -7,7 +7,7 @@ export const signUpUserDal = async (user: UserInterface) => {
     const checking = await User.findOne(user);
     if (!checking) {
       const result = await newUser.save();
-      if (result) return user;
+      if (result) return `User created`;
     } else {
       return `User exist`;
     }
@@ -20,7 +20,7 @@ export const signInUserDal = async (user: UserInterface) => {
   try {
     const findUser = await User.findOne(user);
     if (findUser) {
-      return findUser;
+      return `User exist`;
     } else {
       return `User is not exist`;
     }
