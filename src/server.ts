@@ -3,9 +3,10 @@ import morgan from "morgan";
 import usersRouter from "./users/usersRouter";
 import { config } from "./config";
 import { connectionToDB } from "./connectionToDB";
-
+import cors from 'cors'
 const app = express();
 
+app.use(cors())
 app.use(morgan(`tiny`));
 app.use(express.json());
 app.use(`/users`, usersRouter);
