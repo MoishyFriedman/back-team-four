@@ -5,13 +5,8 @@ import usersRouter from "./users/usersRouter";
 import productsRouter from "./products/productsRouter";
 import { config } from "./config";
 import { connectionToDB } from "./connectionToDB";
-<<<<<<< HEAD
-import cors from "cors";
-const app = express();
-=======
 
-const app = express(); 
->>>>>>> 8a4b16c51e922e6fa8b6b4798c142076885ba61a
+const app = express();
 
 app.use(cors());
 app.use(morgan(`tiny`));

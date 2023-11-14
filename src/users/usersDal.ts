@@ -3,9 +3,7 @@ import { User } from "./userModel";
 
 export const signUpUserDal = async (user: UserInterface) => {
   const newUser = new User(user);
-<<<<<<< HEAD
-  await newUser.save();
-=======
+  // await newUser.save();
   try {
     const checking = await User.findOne(user);
     if (!checking) {
@@ -30,5 +28,4 @@ export const signInUserDal = async (user: UserInterface) => {
   } catch (err) {
     console.error(err);
   }
->>>>>>> 8a4b16c51e922e6fa8b6b4798c142076885ba61a
 };
