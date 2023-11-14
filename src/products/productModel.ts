@@ -19,6 +19,6 @@ const categorySchema = new Schema<ICategory>({
 });
 
 const Product = mongoose.model<IProduct>("Product", productSchema);
-const Category = mongoose.model<ICategory>("Category", categorySchema);
+const Categories = mongoose.model<ICategory>("Categories", categorySchema);
 
-export { Product, Category };
+export { Product, Categories };
