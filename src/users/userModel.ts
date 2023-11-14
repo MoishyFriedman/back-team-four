@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 import { UserInterface } from "../types";
 
 const userSchema = new Schema<UserInterface>({
-  email: { type: String, required: true },
+  email: { type: String, required: true,unique: true },
   password: { type: String, required: true },
 });
 

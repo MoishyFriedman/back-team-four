@@ -14,9 +14,12 @@ interface IProduct {
 }
 
 interface ICategory {
-    category_name: string;
-    view: number;
- }
+  category_name: string;
+  view: number;
+}
 
-
+interface ICart {
+  user_id: string;
+  products_id: string[];
+}
 export { UserInterface, IProduct, ICategory };
