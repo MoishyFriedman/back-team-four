@@ -1,6 +1,10 @@
 import { UserInterface } from "../types";
 import { User } from "./userModel";
 
+const getCartFromData = (userId: string) => {
+  
+}
+
 export const signUpUserDal = async (user: UserInterface) => {
   const newUser = new User(user);
   try {
