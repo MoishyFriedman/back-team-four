@@ -1,4 +1,4 @@
-import { Categories } from "./productModel";
+import { Categories, Product } from "./productModel";
 
 export const getCategoriesDal = async () => {
   try {
@@ -10,10 +10,15 @@ export const getCategoriesDal = async () => {
   }
 };
 
-export const topCategoriesDal = async () => {
+export const topCategoriesDal = async () => {};
+
+export const getProductsDal = async (category: string) => {
   try {
-    const categories = await Categories.find().sort({ view: -1 }).limit(5);
-    console.log(categories);
-    return categories;
-  } catch (error) {}
+    const productsData = await Product.find({ category_id: category });
+    if (productsData.length > 0) {
+      return productsData;
+    } else throw Error(`Can'not find products by category ${category}`);
+  } catch (err) {
+    return err;
+  }
 };
