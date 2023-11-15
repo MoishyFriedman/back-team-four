@@ -1,6 +1,6 @@
 import express, { json } from "express";
 import morgan from "morgan";
-import cors from "cors"
+import cors from "cors";
 import usersRouter from "./users/usersRouter";
 import productsRouter from "./products/productsRouter";
 import { config } from "./config";
