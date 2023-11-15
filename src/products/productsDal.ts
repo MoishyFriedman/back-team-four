@@ -7,7 +7,11 @@ export const getCategoriesDal = async () => {
   return categories;
 };
 
-export const topCategoriesDal = async () => {};
+export const topCategoriesDal = async () => {
+  const categories = await Categories.find().sort({ view: -1 }).limit(5);
+  console.log(categories);
+  return categories;
+};
 
 export const getProductsDal = async (category: string) => {
   try {
