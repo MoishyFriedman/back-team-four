@@ -3,7 +3,11 @@ import {
   getCategoriesService,
   topCategoriesService,
   getProductsService,
+<<<<<<< HEAD
+  getTop5ProductsService
+=======
   // addToCartService,
+>>>>>>> main
 } from "./productsService";
 import { IProduct } from "../types";
 
@@ -39,6 +43,17 @@ export const getProducts = async (req: Request, res: Response) => {
   }
 };
 
+export const getTop5Products = async (req: Request, res: Response) => {
+  try {
+    const productsData = await getTop5ProductsService();
+    if (Array.isArray(productsData) && productsData.length > 0)
+      res.status(200).json(productsData);
+    else throw productsData;
+  } catch (err) {
+    res.status(403).json(err);
+    console.error(err);
+  }
+};
 
 
 
