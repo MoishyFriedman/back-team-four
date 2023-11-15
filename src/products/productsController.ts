@@ -29,6 +29,8 @@ export const getTop5Categories = async (req: Request, res: Response) => {
 export const getProducts = async (req: Request, res: Response) => {
   try {
     const productsData = await getProductsService(req.body.categoryId);
+    console.log(req.body.categoryId);
+    
     if (Array.isArray(productsData) && productsData.length > 0)
       res.status(200).json(productsData);
     else throw productsData;
