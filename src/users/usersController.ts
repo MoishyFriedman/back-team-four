@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { signUpUserService, signInUserService } from "./usersServices";
+import { signUpUserService, signInUserService, addToCartService } from "./usersServices";
 import emailValidator from "email-validator";
 import passwordValidator from "password-validator";
 import { UserInterface } from "../types";
@@ -45,6 +45,16 @@ export const signInUser = async (req: Request, res: Response) => {
     if (!validatePassword) throw Error(`No validate password`);
     const userExistCheck = await signInUserService(req.body);
     res.status(userExistCheck ===  `User exist` ? 200 : 403).json(userExistCheck);
+  } catch (err) {
+    res.status(403).json(err);
+    console.error(err);
+  }
+};
+
+export const addToCart = async (req: Request, res: Response) => {
+  try {
+    const addToCartResult = await addToCartService(req.body.userId, req.body.productId);
+    res.status(200).json(addToCartResult);
   } catch (err) {
     res.status(403).json(err);
     console.error(err);

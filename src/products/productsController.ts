@@ -3,6 +3,7 @@ import {
   getCategoriesService,
   topCategoriesService,
   getProductsService,
+  addToCartService,
 } from "./productsService";
 import { IProduct } from "../types";
 
@@ -28,7 +29,7 @@ export const getTop5Categories = async (req: Request, res: Response) => {
 
 export const getProducts = async (req: Request, res: Response) => {
   try {
-    const productsData = await getProductsService(req.body.categoryId);
+    const productsData = await getProductsService(req.params.categoryId);
     if (Array.isArray(productsData) && productsData.length > 0)
       res.status(200).json(productsData);
     else throw productsData;
@@ -37,3 +38,7 @@ export const getProducts = async (req: Request, res: Response) => {
     console.error(err);
   }
 };
+
+
+
+

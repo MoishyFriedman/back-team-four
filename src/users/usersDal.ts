@@ -3,7 +3,6 @@ import { User } from "./userModel";
 
 export const signUpUserDal = async (user: UserInterface) => {
   const newUser = new User(user);
-  // await newUser.save();
   try {
     const checking = await User.findOne(user);
     if (!checking) {
@@ -15,6 +14,8 @@ export const signUpUserDal = async (user: UserInterface) => {
   } catch (err) {
     console.error(err);
   }
+
+  //יצירת עגלה
 };
 
 export const signInUserDal = async (user: UserInterface) => {
@@ -28,4 +29,19 @@ export const signInUserDal = async (user: UserInterface) => {
   } catch (err) {
     console.error(err);
   }
+
+  //החזרת עגלה
 };
+
+export const addToCartDal = async (userId: string, productId: string) => {
+  // מחכה לסכמת/מודל עגלה
+  
+    // try {
+    //   const productsData = await Product.find({ category_id: category });
+    //   if (productsData.length > 0) {
+    //     return productsData;
+    //   } else throw Error(`Can'not find products by category ${category}`);
+    // } catch (err) {
+    //   return err;
+    // }
+  };
