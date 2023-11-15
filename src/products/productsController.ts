@@ -3,6 +3,7 @@ import {
   getCategoriesService,
   topCategoriesService,
   getProductsService,
+  addToCartService,
 } from "./productsService";
 import { IProduct } from "../types";
 
@@ -37,3 +38,7 @@ export const getProducts = async (req: Request, res: Response) => {
     console.error(err);
   }
 };
+
+
+
+
