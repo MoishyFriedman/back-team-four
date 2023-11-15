@@ -3,8 +3,7 @@ import {
   getAllCategories,
   getTop5Categories,
   getProducts,
-  createCart,
-  addToCart
+  getTop5Products,
 } from "./productsController";
 
 const router = express.Router();
@@ -13,6 +12,8 @@ router.get(`/categories`, getAllCategories);
 
 router.get(`/topCategories`, getTop5Categories);
 
-router.get(`/`, getProducts);
+router.get(`/allProducts/:categoryId`, getProducts);
+
+router.get(`/topProducts`, getTop5Products);
 
 export default router;
