@@ -1,5 +1,10 @@
 import { Request, Response } from "express";
-import { getCategoriesService, topCategoriesService } from "./productsService";
+import {
+  getCategoriesService,
+  topCategoriesService,
+  getProductsService,
+} from "./productsService";
+import { IProduct } from "../types";
 
 export const getAllCategories = async (req: Request, res: Response) => {
   try {
@@ -15,6 +20,18 @@ export const getTop5Categories = async (req: Request, res: Response) => {
   try {
     const topCategoriesData = await topCategoriesService();
     res.status(200).json(topCategoriesData);
+  } catch (err) {
+    res.status(403).json(err);
+    console.error(err);
+  }
+};
+
+export const getProducts = async (req: Request, res: Response) => {
+  try {
+    const productsData = await getProductsService(req.body.categoryId);
+    if (Array.isArray(productsData) && productsData.length > 0)
+      res.status(200).json(productsData);
+    else throw productsData;
   } catch (err) {
     res.status(403).json(err);
     console.error(err);
