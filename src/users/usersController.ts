@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { signUpUserService, signInUserService, addToCartService } from "./usersServices";
+import { signUpUserService, signInUserService, addToCartService, deleteFromCartService } from "./usersServices";
 import emailValidator from "email-validator";
 import passwordValidator from "password-validator";
 import { UserInterface } from "../types";
@@ -60,3 +60,15 @@ export const addToCart = async (req: Request, res: Response) => {
     console.error(err);
   }
 };
+
+export const deleteFromCart = async (req: Request, res: Response) => {
+  try {
+    const deleteFromCartResult = await deleteFromCartService(req.body.userId, req.body.productId);
+    res.status(200).json(deleteFromCartResult);
+  } catch (err) {
+    res.status(403).json(err);
+    console.error(err);
+  }
+};
+
+
