@@ -34,3 +34,24 @@ export const getTop5ProductsDal = async () => {
     return err;
   }
 };
+
+// const updatedCategory = await Category.findOneAndUpdate(
+//   { _id: categoryId },
+//   { $inc: { rating: 1 } },
+//   { new: true }
+// );
+
+
+export const categoryRatingDal = async (categoryId: string) => {
+  // try {
+  //   const categoryRatingResult = await Categories.findOneAndUpdate(
+  //     {_id: categoryId},
+  //     {}
+  //   )
+  //   if (productsData.length > 0) {
+  //     return productsData;
+  //   } else throw Error(`Getting the most viewed products was not successful`);
+  // } catch (err) {
+  //   return err;
+  // }
+};

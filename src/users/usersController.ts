@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { signUpUserService, signInUserService } from "./usersServices";
 import emailValidator from "email-validator";
 import passwordValidator from "password-validator";
-import { ICart } from "../types";
 
 const schema = new passwordValidator();
 
@@ -45,7 +44,7 @@ export const signInUser = async (req: Request, res: Response) => {
     const validatePassword = schema.validate(req.body.password);
     if (!validatePassword) throw Error(`No validate password`);
     const userExistCheck = await signInUserService(req.body);
-    if (typeof userExistCheck === `object`)
+    if (typeof userExistCheck === `string`)
       res.status(200).json(userExistCheck);
     else throw userExistCheck;
   } catch (err) {
