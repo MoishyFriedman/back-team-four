@@ -3,13 +3,8 @@ import {
   getCategoriesService,
   topCategoriesService,
   getProductsService,
-<<<<<<< HEAD
   getTop5ProductsService
-=======
-  // addToCartService,
->>>>>>> main
 } from "./productsService";
-import { IProduct } from "../types";
 
 export const getAllCategories = async (req: Request, res: Response) => {
   try {

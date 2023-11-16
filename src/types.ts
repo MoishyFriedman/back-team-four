@@ -19,7 +19,7 @@ interface ICategory {
 }
 
 interface ICart {
-  user_id: string; 
+  user_id: string;
   products_id: string[];
 }
 export { UserInterface, IProduct, ICategory, ICart };
