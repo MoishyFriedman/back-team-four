@@ -29,8 +29,9 @@ export const signUpUser = async (req: Request, res: Response) => {
     const validatePassword = schema.validate(req.body.password);
     if (!validatePassword) throw Error(`No validate password`);
     const userSignUpAct = await signUpUserService(req.body);
-    if (typeof userSignUpAct === `string`) res.status(200).json(userSignUpAct);
-    else throw userSignUpAct;
+    if (userSignUpAct instanceof Error) throw userSignUpAct;
+    console.log(userSignUpAct);
+    res.status(200).json(userSignUpAct);
   } catch (err) {
     console.error(err);
     res.status(403).json(err);
@@ -44,9 +45,9 @@ export const signInUser = async (req: Request, res: Response) => {
     const validatePassword = schema.validate(req.body.password);
     if (!validatePassword) throw Error(`No validate password`);
     const userExistCheck = await signInUserService(req.body);
-    if (typeof userExistCheck === `string`)
-      res.status(200).json(userExistCheck);
-    else throw userExistCheck;
+    if (userExistCheck instanceof Error) throw userExistCheck;
+    console.log(userExistCheck);
+    res.status(200).json(userExistCheck);
   } catch (err) {
     console.error(err);
     res.status(403).json(err);

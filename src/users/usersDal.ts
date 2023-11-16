@@ -12,7 +12,7 @@ export const signUpUserDal = async (user: UserInterface) => {
         const userId = result._id;
         const newCart = new Cart({ user_id: userId, products_id: [] });
         const cartResult = await newCart.save();
-        if (cartResult) return userId;
+        if (cartResult) return userId ;
         else throw Error(`Failed to create cart`);
       }
     } else {
@@ -28,7 +28,8 @@ export const signInUserDal = async (user: UserInterface) => {
   try {
     const findUser = await User.findOne(user);
     if (findUser) {
-      return findUser._id;
+      const userId = findUser._id;
+      return { userId };
     } else {
       throw Error(`User is not exist`);
     }
