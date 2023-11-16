@@ -43,8 +43,23 @@ export const categoryRatingDal = async (categoryId: string) => {
       { new: true }
     );
     if (categoryRatingResult) {
-      // return productsData;
-    } else throw Error(`Getting the most viewed products was not successful`);
+      return categoryRatingResult.view;
+    } else throw Error(`Rating update failed`);
+  } catch (err) {
+    return err;
+  }
+};
+
+export const productRatingDal = async (productId: string) => {
+  try {
+    const productRatingResult = await Product.findOneAndUpdate(
+      { _id: productId },
+      { $inc: { view: 1 } },
+      { new: true }
+    );
+    if (productRatingResult) {
+      return productRatingResult.view;
+    } else throw Error(`Rating update failed`);
   } catch (err) {
     return err;
   }
