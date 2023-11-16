@@ -1,10 +1,5 @@
 import { Request, Response } from "express";
-import {
-  signUpUserService,
-  signInUserService,
-  addToCartService,
-  deleteFromCartService,
-} from "./usersServices";
+import { signUpUserService, signInUserService } from "./usersServices";
 import emailValidator from "email-validator";
 import passwordValidator from "password-validator";
 import { ICart } from "../types";
@@ -50,37 +45,11 @@ export const signInUser = async (req: Request, res: Response) => {
     const validatePassword = schema.validate(req.body.password);
     if (!validatePassword) throw Error(`No validate password`);
     const userExistCheck = await signInUserService(req.body);
-    res
-      .status(userExistCheck === `User exist` ? 200 : 403)
-      .json(userExistCheck);
+    if (typeof userExistCheck === `object`)
+      res.status(200).json(userExistCheck);
+    else throw userExistCheck;
   } catch (err) {
-    res.status(403).json(err);
     console.error(err);
-  }
-};
-
-export const addToCart = async (req: Request, res: Response) => {
-  try {
-    const addToCartResult = await addToCartService(
-      req.body.userId,
-      req.body.productId
-    );
-    res.status(200).json(addToCartResult);
-  } catch (err) {
     res.status(403).json(err);
-    console.error(err);
-  }
-};
-
-export const deleteFromCart = async (req: Request, res: Response) => {
-  try {
-    const deleteFromCartResult = await deleteFromCartService(
-      req.body.userId,
-      req.body.productId
-    );
-    res.status(200).json(deleteFromCartResult);
-  } catch (err) {
-    res.status(403).json(err);
-    console.error(err);
   }
 };
