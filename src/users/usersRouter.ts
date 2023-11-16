@@ -1,5 +1,10 @@
 import express from "express";
-import { signUpUser, signInUser, addToCart, deleteFromCart } from "./usersController";
+import {
+  signUpUser,
+  signInUser,
+  addToCart,
+  deleteFromCart,
+} from "./usersController";
 
 const router = express.Router();
 
