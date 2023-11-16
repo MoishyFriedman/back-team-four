@@ -28,10 +28,7 @@ export const signInUserDal = async (user: UserInterface) => {
   try {
     const findUser = await User.findOne(user);
     if (findUser) {
-      const cartFromData = await Cart.findOne({ user_id: findUser._id });
-      if (!cartFromData)
-        throw Error(`Something is wrong can't find cart by user ID`);
-      return { userId: findUser._id, cart: cartFromData.products_id };
+      return findUser._id;
     } else {
       throw Error(`User is not exist`);
     }
