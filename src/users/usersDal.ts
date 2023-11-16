@@ -1,4 +1,4 @@
-import { UserInterface, ICart } from "../types";
+import { UserInterface } from "../types";
 import { User } from "./userModel";
 import { Cart } from "./cartModel";
 
@@ -6,21 +6,10 @@ const getCartFromData = async (userId: string) => {
   try {
     const cartFromData = await Cart.findOne({ user_id: userId });
     if (!cartFromData)
-      throw Error(`Something is wrong can't fid cart by user ID`);
-    return cartFromData;
+      throw Error(`Something is wrong can't find cart by user ID`);
+    return cartFromData.products_id;
   } catch (err) {
     console.error(err);
-    return err;
-  }
-};
-
-const getUserIdByEmailAndPassword = async (user: UserInterface) => {
-  try {
-    const userId = await User.findOne(user);
-    if (!userId) throw Error(`Something not working can't find the user ID`);
-    console.log(userId?._id);
-    return userId?._id;
-  } catch (err) {
     return err;
   }
 };
@@ -32,9 +21,8 @@ export const signUpUserDal = async (user: UserInterface) => {
     if (!checking) {
       const result = await newUser.save();
       if (result) {
-        const userId = result._id.toString();
-        const cart: ICart = {user_id: userId, products_id: []} 
-        const newCart = new Cart(cart);
+        const userId = result._id;
+        const newCart = new Cart({ user_id: userId, products_id: [] });
         const cartResult = await newCart.save();
         if (cartResult) return userId;
         else throw Error(`Failed to create cart`);
@@ -52,15 +40,17 @@ export const signInUserDal = async (user: UserInterface) => {
   try {
     const findUser = await User.findOne(user);
     if (findUser) {
-      return `User exist`;
+      const cartFromData = await Cart.findOne({ user_id: findUser._id });
+      if (!cartFromData)
+        throw Error(`Something is wrong can't find cart by user ID`);
+      return { userId: findUser._id, cart: cartFromData.products_id };
     } else {
-      return `User is not exist`;
+      throw Error(`User is not exist`);
     }
   } catch (err) {
     console.error(err);
+    return err;
   }
-
-  //החזרת עגלה
 };
 
 export const addToCartDal = async (userId: string, productId: string) => {

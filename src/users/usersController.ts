@@ -50,12 +50,12 @@ export const signInUser = async (req: Request, res: Response) => {
     const validatePassword = schema.validate(req.body.password);
     if (!validatePassword) throw Error(`No validate password`);
     const userExistCheck = await signInUserService(req.body);
-    res
-      .status(userExistCheck === `User exist` ? 200 : 403)
-      .json(userExistCheck);
+    if (typeof userExistCheck === `object`)
+      res.status(200).json(userExistCheck);
+    else throw userExistCheck;
   } catch (err) {
-    res.status(403).json(err);
     console.error(err);
+    res.status(403).json(err);
   }
 };
 
