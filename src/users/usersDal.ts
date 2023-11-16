@@ -1,5 +1,6 @@
 import { UserInterface } from "../types";
 import { User } from "./userModel";
+import { Cart } from "./cartModel";
 
 export const signUpUserDal = async (user: UserInterface) => {
   const newUser = new User(user);
@@ -7,41 +8,32 @@ export const signUpUserDal = async (user: UserInterface) => {
     const checking = await User.findOne(user);
     if (!checking) {
       const result = await newUser.save();
-      if (result) return `User created`;
+      if (result) {
+        const userId = result._id;
+        const newCart = new Cart({ user_id: userId, products_id: [] });
+        const cartResult = await newCart.save();
+        if (cartResult) return userId;
+        else throw Error(`Failed to create cart`);
+      }
     } else {
-      return `User exist`;
+      throw Error(`User already exists`);
     }
   } catch (err) {
     console.error(err);
+    return err;
   }
-
-  //יצירת עגלה
 };
 
 export const signInUserDal = async (user: UserInterface) => {
   try {
     const findUser = await User.findOne(user);
     if (findUser) {
-      return `User exist`;
+      return findUser._id;
     } else {
-      return `User is not exist`;
+      throw Error(`User is not exist`);
     }
   } catch (err) {
     console.error(err);
+    return err;
   }
-
-  //החזרת עגלה
 };
-
-export const addToCartDal = async (userId: string, productId: string) => {
-  // מחכה לסכמת/מודל עגלה
-  
-    // try {
-    //   const productsData = await Product.find({ category_id: category });
-    //   if (productsData.length > 0) {
-    //     return productsData;
-    //   } else throw Error(`Can'not find products by category ${category}`);
-    // } catch (err) {
-    //   return err;
-    // }
-  };

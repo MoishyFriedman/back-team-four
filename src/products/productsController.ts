@@ -5,7 +5,6 @@ import {
   getProductsService,
   getTop5ProductsService
 } from "./productsService";
-import { IProduct } from "../types";
 
 export const getAllCategories = async (req: Request, res: Response) => {
   try {
