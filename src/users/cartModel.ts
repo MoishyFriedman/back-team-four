@@ -10,6 +10,6 @@ const cartSchema = new Schema<ICart>({
     type: [String],
     required: true,
   },
-});
+}); 
 
 export const Cart = model<ICart>("Cart", cartSchema);
