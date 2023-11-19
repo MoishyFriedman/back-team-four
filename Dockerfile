@@ -5,7 +5,7 @@ COPY package*.json tsconfig.json ./
 RUN npm install
 
 COPY ./src ./src
-RUN npx tsc
+RUN tsc
 
 FROM node:lts-slim as artifact
 WORKDIR /app
