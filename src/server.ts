@@ -7,7 +7,7 @@ import cartsRouter from "./carts/cartsRouter";
 import { config } from "./config";
 import { connectionToDB } from "./connectionToDB";
 
-const app = express();
+const app = express(); 
 
 app.use(cors());
 app.use(morgan(`tiny`));
