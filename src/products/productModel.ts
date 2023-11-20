@@ -1,24 +1,13 @@
 import mongoose, { Schema } from "mongoose";
-import { ICategory, IProduct } from "../types";
+import { Category, Product } from "../types";
 
 // Mongoose schema for the product
-const productSchema = new Schema<IProduct>({
-  product_name: { type: String, required: true },
-  product_image_url: { type: String, required: true },
-  description: { type: String, required: true },
-  category_id: { type: String, required: true },
-  price: { type: Number, required: true },
-  stock_quantity: { type: Number, required: true },
-  view: { type: Number, required: true },
-});
+const productSchema = new Schema<Product>({});
 
 // Mongoose schema for the category
-const categorySchema = new Schema<ICategory>({
-  category_name: { type: String, required: true },
-  view: { type: Number, required: true },
-});
+const categorySchema = new Schema<Category>({});
 
-const Product = mongoose.model<IProduct>("Product", productSchema);
-const Categories = mongoose.model<ICategory>("Categories", categorySchema);
+const Product = mongoose.model<Product>("Product", productSchema);
+const Categories = mongoose.model<Category>("Categories", categorySchema);
 
 export { Product, Categories };

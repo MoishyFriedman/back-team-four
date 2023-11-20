@@ -1,25 +1,31 @@
-interface UserInterface {
+interface CartItem {
+  productId: string;
+  quantity: number;
+}
+
+interface Checkout {
+  orderId: string;
+  cartItems: CartItem[];
+}
+
+interface User {
+  userId: string;
   email: string;
   password: string;
 }
 
-interface IProduct {
-  product_name: string;
-  product_image_url: string;
-  description: string;
-  category_id: string;
+interface Product {}
+interface Category {}
+
+interface Order {
+  cartItems: Product[];
+  orderTime: Date;
+  status: string;
   price: number;
-  stock_quantity: number;
-  view: number;
+  shippingDetails: {
+    address: string;
+    contactNumber: string;
+  };
 }
 
-interface ICategory {
-  category_name: string;
-  view: number;
-}
-
-interface ICart {
-  user_id: string;
-  products_id: string[];
-}
-export { UserInterface, IProduct, ICategory, ICart };
+export { CartItem, Checkout, User, Product, Category, Order };
