@@ -1,9 +1,10 @@
 import { Schema, model } from "mongoose";
-import { UserInterface } from "../types";
+import { User } from "../types";
 
-const userSchema = new Schema<UserInterface>({
-  email: { type: String, required: true,unique: true },
+const userSchema = new Schema<User>({
+  userId: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 });
 
-export const User = model<UserInterface>("User", userSchema);
+export const UserDB = model<User>("User", userSchema);
